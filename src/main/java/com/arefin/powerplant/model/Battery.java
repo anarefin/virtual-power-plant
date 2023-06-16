@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
+import java.util.Objects;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -28,5 +29,22 @@ public class Battery {
     @Positive(message = "Watt capacity must be a positive value")
     private int capacity;
 
-    public Battery(String name, String postcode, int capacity) {}
+    public Battery(String name, String postcode, int capacity) {
+        this.name = name;
+        this.postcode = postcode;
+        this.capacity = capacity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Battery battery = (Battery) o;
+        return Objects.equals(id, battery.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -19,17 +19,12 @@ import java.util.stream.StreamSupport;
 @Service
 public class BatteryService {
     private static final String POSTCODE_REGEX = "\\d{4}";
-    //private final BatteryRepository batteryRepository;
     private final BatteryRepository batteryRepository;
 
     @Autowired
     public BatteryService(BatteryRepository batteryRepository) {
         this.batteryRepository = batteryRepository;
     }
-
-//    public BatteryService(BatteryRepository batteryRepository) {
-//        this.batteryRepository = batteryRepository;
-//    }
 
     public void addBatteries(List<Battery> batteries) {
         if (batteries.isEmpty()) {
@@ -72,12 +67,6 @@ public class BatteryService {
         batteryStatisticsResponse.setBatteries(batteries.stream().map(Battery::getName).collect(Collectors.toList()));
         batteryStatisticsResponse.setTotalWattCapacity(totalWattCapacity);
         batteryStatisticsResponse.setAverageWattCapacity(averageWattCapacity);
-
-//        Map<String, Object> response = Map.of(
-//                "batteries", ,
-//                "totalWattCapacity", totalWattCapacity,
-//                "averageWattCapacity", averageWattCapacity
-//        );
         return batteryStatisticsResponse;
     }
 

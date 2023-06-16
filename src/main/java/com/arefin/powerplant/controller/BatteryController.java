@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/batteries")
 public class BatteryController {
 
     private final BatteryService batteryService;
@@ -28,7 +27,7 @@ public class BatteryController {
         this.batteryService = batteryService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/batteries")
     public ResponseEntity<AddBatteryResponse> addBatteries(@RequestBody @Valid List<Battery> batteries) {
         try {
             batteryService.addBatteries(batteries);
@@ -42,7 +41,7 @@ public class BatteryController {
         }
     }
 
-    @GetMapping("/statistics")
+    @GetMapping("/batteries/statistics")
     public ResponseEntity<BatteryStatisticsResponse> getBatteriesInPostcodeRange(
             @RequestParam("start") @Pattern(regexp = "\\d{4}", message = "Invalid start postcode") String start,
             @RequestParam("end") @Pattern(regexp = "\\d{4}", message = "Invalid end postcode") String end) {
