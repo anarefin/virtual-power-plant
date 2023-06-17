@@ -8,6 +8,7 @@ import com.arefin.powerplant.repository.BatteryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,11 +63,13 @@ public class BatteryService {
 
         int totalWattCapacity = batteries.stream().mapToInt(Battery::getCapacity).sum();
         double averageWattCapacity = batteries.stream().mapToInt(Battery::getCapacity).average().orElse(0);
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        double formattedAverageWattCapacity = Double.parseDouble(decimalFormat.format(averageWattCapacity));
 
         BatteryStatisticsResponse batteryStatisticsResponse = new BatteryStatisticsResponse();
         batteryStatisticsResponse.setBatteries(batteries.stream().map(Battery::getName).collect(Collectors.toList()));
         batteryStatisticsResponse.setTotalWattCapacity(totalWattCapacity);
-        batteryStatisticsResponse.setAverageWattCapacity(averageWattCapacity);
+        batteryStatisticsResponse.setAverageWattCapacity(formattedAverageWattCapacity);
         return batteryStatisticsResponse;
     }
 
