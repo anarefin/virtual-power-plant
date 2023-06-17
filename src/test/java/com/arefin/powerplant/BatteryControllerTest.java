@@ -37,12 +37,6 @@ class BatteryControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-//        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-//        validator = factory.getValidator();
-
-//        MockitoAnnotations.openMocks(this);
-//        batteryController = new BatteryController(batteryService);
-//        validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
 
     @Test

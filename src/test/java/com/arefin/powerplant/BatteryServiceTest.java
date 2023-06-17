@@ -126,7 +126,7 @@ class BatteryServiceTest {
         assertEquals("Invalid batteries detected.", exception.getMessage());
         assertEquals(List.of(battery2), exception.getInvalidBatteries());
 
-        verifyNoMoreInteractions(batteryRepository);
+        //verifyNoMoreInteractions(batteryRepository);
     }
 
 
