@@ -108,6 +108,28 @@ class BatteryServiceTest {
         assertEquals(200, response.getAverageWattCapacity());
     }
 
+    @Test
+    void addBatteries_someInvalidBatteries_throwsInvalidBatteryException() {
+        // Arrange
+        List<Battery> batteries = new ArrayList<>();
+        Battery battery1 = new Battery("Battery 1", "1234", 100);
+        Battery battery2 = new Battery("", "5678", -200); // Invalid battery
+        batteries.add(battery1);
+        batteries.add(battery2);
+
+        when(batteryRepository.existsByName(battery1.getName())).thenReturn(false);
+        when(batteryRepository.existsByName(battery2.getName())).thenReturn(false);
+
+        // Act and Assert
+        InvalidBatteryException exception = assertThrows(InvalidBatteryException.class,
+                () -> batteryService.addBatteries(batteries));
+        assertEquals("Invalid batteries detected.", exception.getMessage());
+        assertEquals(List.of(battery2), exception.getInvalidBatteries());
+
+        verifyNoMoreInteractions(batteryRepository);
+    }
+
+
     // Add more test cases for other methods if needed
 }
 
